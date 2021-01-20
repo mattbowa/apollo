@@ -1,6 +1,11 @@
 require('dotenv').config();
 
-const { ApolloServer } = require('apollo-server');
+//const { ApolloServer } = require('apollo-server');
+const { ApolloServer } = require('apollo-server-express');
+
+const express = require('express');
+const app = express();
+
 const isEmail = require('isemail');
 
 const typeDefs = require('./schema');
@@ -52,6 +57,7 @@ const server = new ApolloServer({
 
 // Start our server if we're not in a test env.
 // if we're in a test env, we'll manually start it in a test
+/*
 if (process.env.NODE_ENV !== 'test') {
   server.listen().then(() => {
     console.log(`
@@ -61,6 +67,27 @@ if (process.env.NODE_ENV !== 'test') {
     `);
   });
 }
+*/
+
+var bodyParser = require('body-parser')
+// parse application/x-www-form-urlencoded
+//app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
+
+app.use( function(req, res, next){
+  console.log("A new request received at " + Date.now());
+  console.log(`REC DATA: ${JSON.stringify(req.body)}`);
+  //console.log(`REC DATA: ${req}`);
+  next();
+});
+
+server.applyMiddleware({ app });
+
+app.listen({ port: 4000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath} \n`)
+);
+
 
 // export all the important pieces for integration/e2e tests to use
 module.exports = {

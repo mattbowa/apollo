@@ -29,10 +29,14 @@ module.exports.paginateResults = ({
 };
 
 module.exports.createStore = () => {
+
+/*
   const db = new Sequelize({
     dialect: 'sqlite',
     storage: './store.sqlite'
   });
+*/
+  const db = new Sequelize('postgres://pgres:matt1234@127.0.0.1:5432/apollo')
 
   const users = db.define('user', {
     createdAt: Sequelize.DATE,

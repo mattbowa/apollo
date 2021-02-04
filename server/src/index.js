@@ -78,7 +78,6 @@ app.use(bodyParser.json())
 app.use( function(req, res, next){
   console.log("A new request received at " + Date.now());
   console.log(`REC DATA: ${JSON.stringify(req.body)}`);
-  //console.log(`REC DATA: ${req}`);
   next();
 });
 
@@ -87,7 +86,6 @@ server.applyMiddleware({ app });
 app.listen({ port: 4000 }, () =>
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath} \n`)
 );
-
 
 // export all the important pieces for integration/e2e tests to use
 module.exports = {

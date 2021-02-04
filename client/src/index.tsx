@@ -26,7 +26,7 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,
   //uri: 'http://localhost:4000/graphql',
   
-  uri: 'http://192.168.1.53:4000/graphql',
+  uri: 'http://192.168.1.55:4000/graphql',
   headers: {
     authorization: localStorage.getItem('token') || '',
     'client-name': 'Space Explorer [web]',
